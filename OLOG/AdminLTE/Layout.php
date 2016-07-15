@@ -280,6 +280,7 @@ class Layout
 */ ?>
 			<!-- Sidebar Menu -->
 			<ul class="sidebar-menu">
+				<li class="header">Меню</li>
 				<!-- Optionally, you can add icons to the links -->
 				<?php
 
