@@ -305,7 +305,7 @@ class Layout
 						foreach ($children_arr as $child_menu_item_obj) {
 							$children_href = '';
 							if ($child_menu_item_obj->getUrl()) {
-								$children_href = 'href="' . Sanitize::sanitizeUrl($menu_item_obj->getUrl()) . '"';
+								$children_href = 'href="' . Sanitize::sanitizeUrl($child_menu_item_obj->getUrl()) . '"';
 							}
 							echo '<li><a ' . $children_href . '>' . Sanitize::sanitizeTagContent($child_menu_item_obj->getText()) . '</a></li>';
 						}
