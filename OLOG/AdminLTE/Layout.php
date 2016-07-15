@@ -12,7 +12,7 @@ class Layout
 	static public function render($content_html, $action_obj = null)
 	{
 		$breadcrumbs_arr = [];
-		$h1_str = '';
+		$h1_str = '&nbsp;';
 		$menu_arr = [];
 		$application_title = ConfWrapper::getOptionalValue('php-bt.application_title', 'Application'); // TODO: key name to constant
 		$user_name = 'User Name';
@@ -63,7 +63,7 @@ class Layout
 		  apply the skin class to the body tag so the changes take effect.
 	-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.5/css/skins/skin-blue.min.css">
-	
+
 	<!-- jQuery 2.2.3 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.6 -->
