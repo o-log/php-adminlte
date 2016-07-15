@@ -64,6 +64,12 @@ class Layout
 	-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.5/css/skins/skin-blue.min.css">
 
+	<style>
+		.content-header>.breadcrumb {position: relative;margin-top: 5px;top: 0;right: 0;float: none;background: #d2d6de;padding-left: 10px;}
+		.content-header>.breadcrumb>li+li:before {content: '|' !important;}
+		.content-header>.breadcrumb li:before {position: relative;top: -2px;color: #ffffff !important;}
+	</style>
+	
 	<!-- jQuery 2.2.3 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.6 -->
