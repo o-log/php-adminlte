@@ -11,7 +11,7 @@ class Layout
 
 	static public function render($content_html, $action_obj = null)
 	{
-		$breadcrumbs_arr = [];
+		$breadcrumbs_arr = ConfWrapper::getOptionalValue(\OLOG\BT\BTConstants::MODULE_NAME . '.' . \OLOG\BT\BTConstants::BREADCRUMBS_PREFIX_ARR, []);
 		$h1_str = '&nbsp;';
 		$menu_arr = [];
 		$application_title = ConfWrapper::getOptionalValue('php-bt.application_title', 'Application'); // TODO: key name to constant
@@ -19,7 +19,7 @@ class Layout
 
 		if ($action_obj) {
 			if ($action_obj instanceof BT\InterfaceBreadcrumbs) {
-				$breadcrumbs_arr = $action_obj->currentBreadcrumbsArr();
+				$breadcrumbs_arr = array_merge($breadcrumbs_arr, $action_obj->currentBreadcrumbsArr());
 			}
 
 			if ($action_obj instanceof BT\InterfacePageTitle) {
@@ -64,6 +64,10 @@ class Layout
 	-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.5/css/skins/skin-blue.min.css">
 
+	<style>
+		.sidebar-collapse .sidebar-menu .treeview:hover .pull-right-container > .fa {display: none;}
+	</style>
+	
 	<!-- jQuery 2.2.3 -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 	<!-- Bootstrap 3.3.6 -->
@@ -100,7 +104,6 @@ class Layout
 			<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
 				<span class="sr-only">Toggle navigation</span>
 			</a>
-<?php /*
 			<!-- Navbar Right Menu -->
 			<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
@@ -250,7 +253,6 @@ class Layout
 					</li>
 				</ul>
 			</div>
-*/ ?>
 		</nav>
 
 	</header>
@@ -272,7 +274,7 @@ class Layout
 				</div>
 			</div>
 
-<?php /*
+
 			<!-- search form (Optional) -->
 			<form action="#" method="get" class="sidebar-form">
 				<div class="input-group">
@@ -284,7 +286,7 @@ class Layout
 				</div>
 			</form>
 			<!-- /.search form -->
-*/ ?>
+
 			<!-- Sidebar Menu -->
 			<ul class="sidebar-menu">
 				<li class="header">Меню</li>
@@ -361,14 +363,11 @@ class Layout
 	</div>
 	<!-- /.content-wrapper -->
 
-<?php /*
 	<!-- Main Footer -->
 	<footer class="main-footer">
 		<strong>Copyright &copy; 2016.
 	</footer>
-*/ ?>
 
-<?php /*
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">
 		<!-- Create the tabs -->
@@ -445,7 +444,7 @@ class Layout
 	<!-- Add the sidebar's background. This div must be placed
 		 immediately after the control sidebar -->
 	<div class="control-sidebar-bg"></div>
-*/ ?>
+
 
  </div>
 <!-- ./wrapper -->

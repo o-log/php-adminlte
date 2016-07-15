@@ -15,7 +15,7 @@ class DemoConfig
             'menu_classes_arr' => [
                 DemoMenu::class
             ],
-			'application_title' => 'AdminTEST'
+			\OLOG\BT\BTConstants::BREADCRUMBS_PREFIX_ARR => [\OLOG\BT\BT::a(\BTDemo\DemoAction::getUrl(), '', 'glyphicon glyphicon-home')]
         ];
 
         return $conf;
