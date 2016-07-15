@@ -12,7 +12,7 @@ class Layout
 	static public function render($content_html, $action_obj = null)
 	{
 		$breadcrumbs_arr = [];
-		$h1_str = '&nbsp;';
+		$h1_str = '';
 		$menu_arr = [];
 		$application_title = ConfWrapper::getOptionalValue('php-bt.application_title', 'Application'); // TODO: key name to constant
 		$user_name = 'User Name';
