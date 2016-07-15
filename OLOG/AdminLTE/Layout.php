@@ -294,15 +294,20 @@ class Layout
 				/** @var $menu_item_obj MenuItem */
 				foreach ($menu_arr as $menu_item_obj) {
 					$children_arr = $menu_item_obj->getChildrenArr();
-					$href = '';
 
+					$href = '';
 					if ($menu_item_obj->getUrl()) {
 						$href = 'href="' . Sanitize::sanitizeUrl($menu_item_obj->getUrl()) . '"';
 					}
 
+					$icon = '';
+					if ($menu_item_obj->getIconClassesStr()) {
+						$icon = '<i class="' . $menu_item_obj->getIconClassesStr() . '"></i> ';
+					}
+
 					if (count($children_arr)) {
 						echo '<li class="treeview">';
-						echo '<a ' . $href . '><i class="fa fa-link"></i> <span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+						echo '<a ' . $href . '>' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
 						echo '<ul class="treeview-menu">';
 						/** @var  $child_menu_item_obj MenuItem */
 						foreach ($children_arr as $child_menu_item_obj) {
@@ -310,11 +315,17 @@ class Layout
 							if ($child_menu_item_obj->getUrl()) {
 								$children_href = 'href="' . Sanitize::sanitizeUrl($child_menu_item_obj->getUrl()) . '"';
 							}
-							echo '<li><a ' . $children_href . '>' . Sanitize::sanitizeTagContent($child_menu_item_obj->getText()) . '</a></li>';
+
+							$children_icon = '';
+							if ($child_menu_item_obj->getIconClassesStr()) {
+								$children_icon = '<i class="' . $child_menu_item_obj->getIconClassesStr() . '"></i> ';
+							}
+
+							echo '<li><a ' . $children_href . '>' . $children_icon . '<span>' . Sanitize::sanitizeTagContent($child_menu_item_obj->getText()) . '</span></a></li>';
 						}
 						echo '</ul>';
 					} else {
-						echo '<li><a ' . $href . '><i class="fa fa-link"></i> <span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span></a></li>';
+						echo '<li><a ' . $href . '>' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span></a></li>';
 					}
 				}
 				?>
