@@ -1,0 +1,17 @@
+{
+  "name": "o-log/php-adminlte",
+  "description": "PHP wrapper - Bootstrap Theme AdminLTE",
+  "require" : {
+    "o-log/php-lib" : "1.*",
+    "o-log/php-router" : "1.*"
+  },
+  "require-dev" : {
+    "o-log/php-bt" : "4.*"
+  },
+  "autoload" : {
+    "psr-0" : {
+      "OLOG" : "",
+      "AdminLTEDemo" : ""
+    }
+  }
+}
