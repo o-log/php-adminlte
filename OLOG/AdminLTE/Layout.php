@@ -12,7 +12,7 @@ class Layout
 	static public function render($content_html, $action_obj = null)
 	{
 		$breadcrumbs_arr = [];
-		$h1_str = '';
+		$h1_str = '&nbsp;';
 		$menu_arr = [];
 		$application_title = ConfWrapper::getOptionalValue('php-bt.application_title', 'Application'); // TODO: key name to constant
 		$user_name = 'User Name';
@@ -100,6 +100,7 @@ class Layout
 			<a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
 				<span class="sr-only">Toggle navigation</span>
 			</a>
+<?php /*
 			<!-- Navbar Right Menu -->
 			<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
@@ -249,7 +250,9 @@ class Layout
 					</li>
 				</ul>
 			</div>
+*/ ?>
 		</nav>
+
 	</header>
 	<!-- Left side column. contains the logo and sidebar -->
 	<aside class="main-sidebar">
@@ -345,11 +348,14 @@ class Layout
 	</div>
 	<!-- /.content-wrapper -->
 
+<?php /*
 	<!-- Main Footer -->
 	<footer class="main-footer">
 		<strong>Copyright &copy; 2016.
 	</footer>
+*/ ?>
 
+<?php /*
 	<!-- Control Sidebar -->
 	<aside class="control-sidebar control-sidebar-dark">
 		<!-- Create the tabs -->
@@ -426,7 +432,9 @@ class Layout
 	<!-- Add the sidebar's background. This div must be placed
 		 immediately after the control sidebar -->
 	<div class="control-sidebar-bg"></div>
-</div>
+*/ ?>
+
+ </div>
 <!-- ./wrapper -->
 
 
