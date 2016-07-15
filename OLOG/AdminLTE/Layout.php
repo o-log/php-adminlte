@@ -340,9 +340,11 @@ class Layout
 
 		<!-- Main content -->
 		<section class="content">
-
-			<?= $content_html ?>
-
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<?= $content_html ?>
+				</div>
+			</div>
 		</section>
 		<!-- /.content -->
 	</div>
