@@ -34,4 +34,9 @@ class DemoAction implements InterfaceBreadcrumbs, InterfacePageTitle, BT\Interfa
 
         \OLOG\AdminLTE\Layout::render($html, $this);
     }
+
+	public function showLayoutContentPanel()
+	{
+		return false;
+	}
 }
