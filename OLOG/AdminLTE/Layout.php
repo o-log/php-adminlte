@@ -15,7 +15,7 @@ class Layout
 		$h1_str = '&nbsp;';
 		$menu_arr = [];
 		$application_title = ConfWrapper::getOptionalValue('php-bt.application_title', 'Application'); // TODO: key name to constant
-		$user_name = 'User Name';
+		$user_name = \OLOG\Auth\Auth::currentUserLogin();
 
 		if ($action_obj) {
 			if ($action_obj instanceof BT\InterfaceBreadcrumbs) {
