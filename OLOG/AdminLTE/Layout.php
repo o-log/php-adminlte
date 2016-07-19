@@ -94,7 +94,7 @@ class Layout
 		<!-- Logo -->
 		<a href="/" class="logo">
 			<!-- mini logo for sidebar mini 50x50 pixels -->
-			<span class="logo-mini"><?= mb_substr($application_title, 0, 1)  ?></span>
+			<span class="logo-mini"><?= mb_substr($application_title, 0, 3)  ?></span>
 			<!-- logo for regular state and mobile devices -->
 			<span class="logo-lg"><?= $application_title ?></span>
 		</a>
