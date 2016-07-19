@@ -3,7 +3,6 @@
 namespace OLOG\AdminLTE;
 
 use OLOG\BT;
-use OLOG\ConfWrapper;
 use OLOG\Sanitize;
 
 class Layout
@@ -11,10 +10,15 @@ class Layout
 
 	static public function render($content_html, $action_obj = null)
 	{
-		$breadcrumbs_arr = ConfWrapper::getOptionalValue(\OLOG\BT\BTConstants::MODULE_NAME . '.' . \OLOG\BT\BTConstants::BREADCRUMBS_PREFIX_ARR, []);
+		//$breadcrumbs_arr = ConfWrapper::getOptionalValue(\OLOG\BT\BTConstants::MODULE_NAME . '.' . \OLOG\BT\BTConstants::BREADCRUMBS_PREFIX_ARR, []);
+		$breadcrumbs_arr = BT\BTConfig::getBreadcrumbsPrefixArr();
+
 		$h1_str = '&nbsp;';
 		$menu_arr = [];
-		$application_title = ConfWrapper::getOptionalValue('php-bt.application_title', 'Application'); // TODO: key name to constant
+
+		//$application_title = ConfWrapper::getOptionalValue('php-bt.application_title', 'Application'); // TODO: key name to constant
+		$application_title = BT\BTConfig::getApplicationTitle();
+
 		$user_name = 'Имя пользователя отсутствует';
 
 		if ($action_obj) {
@@ -31,7 +35,9 @@ class Layout
 			}
 		}
 
-		$menu_classes_arr = ConfWrapper::getOptionalValue('php-bt.menu_classes_arr', []); // TODO: key name to constant
+		//$menu_classes_arr = ConfWrapper::getOptionalValue('php-bt.menu_classes_arr', []); // TODO: key name to constant
+		$menu_classes_arr = BT\BTConfig::getMenuClassesArr();
+
 		if ($menu_classes_arr) {
 			foreach ($menu_classes_arr as $menu_class) {
 				if (in_array(BT\InterfaceMenu::class, class_implements($menu_class))) {
