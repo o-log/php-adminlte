@@ -86,7 +86,7 @@ class Layout
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 	<![endif]-->
 </head>
-<body class="hold-transition skin-blue sidebar-mini layout-boxed">
+<body class="hold-transition skin-blue sidebar-mini">
 
 
 
