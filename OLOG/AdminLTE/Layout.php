@@ -365,6 +365,9 @@ class Layout
 			</h1>
 			<?php
 			if (!empty($breadcrumbs_arr)) {
+			    if (count($breadcrumbs_arr) > 2) {
+                    array_pop($breadcrumbs_arr);
+                }
 				echo BT\BT::breadcrumbs($breadcrumbs_arr);
 			}
 			?>
