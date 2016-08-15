@@ -114,6 +114,7 @@ class Layout
 			<!-- Navbar Right Menu -->
 			<div class="navbar-custom-menu">
 				<ul class="nav navbar-nav">
+                    <?php /*
 					<!-- Messages: style can be found in dropdown.less-->
 					<li class="dropdown messages-menu">
 						<!-- Menu toggle button -->
@@ -149,7 +150,6 @@ class Layout
 						</ul>
 					</li>
 					<!-- /.messages-menu -->
-
 					<!-- Notifications Menu -->
 					<li class="dropdown notifications-menu">
 						<!-- Menu toggle button -->
@@ -210,6 +210,7 @@ class Layout
 						</ul>
 					</li>
 					<!-- User Account Menu -->
+                    */ ?>
 					<li class="dropdown user user-menu">
 						<!-- Menu Toggle Button -->
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -258,15 +259,17 @@ class Layout
 								</div>
                                 */ ?>
 								<div class="pull-right">
-									<a href="#" class="btn btn-default btn-flat">Sign out</a>
+									<a href="/auth/logout" class="btn btn-default btn-flat">Sign out</a>
 								</div>
 							</li>
 						</ul>
 					</li>
 					<!-- Control Sidebar Toggle Button -->
+                    <?php /*
 					<li>
 						<a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
 					</li>
+                    */ ?>
 				</ul>
 			</div>
 		</nav>
