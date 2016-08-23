@@ -40,4 +40,9 @@ class DemoAction implements InterfaceBreadcrumbs, InterfacePageTitle, InterfaceU
 	{
 		return false;
 	}
+
+	public function overrideBackgroundColor()
+    {
+        return '';
+    }
 }

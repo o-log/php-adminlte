@@ -361,7 +361,15 @@ class Layout
 	</aside>
 
 	<!-- Content Wrapper. Contains page content -->
-	<div class="content-wrapper">
+    <?php
+        $override_background_color = '';
+        if (method_exists($action_obj, 'overrideBackgroundColor')) {
+            if ($action_obj->overrideBackgroundColor()) {
+                $override_background_color = 'style="background-color: ' . $action_obj->overrideBackgroundColor() . ';"';
+            }
+        }
+    ?>
+	<div class="content-wrapper" <?= $override_background_color ?>>
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
             <style>
