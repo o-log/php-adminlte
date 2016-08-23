@@ -364,17 +364,27 @@ class Layout
 	<div class="content-wrapper">
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
-			<h1>
-				<?= $h1_str ?>
-			</h1>
+            <style>
+                .content-header>.breadcrumb {position: relative;margin-top: 5px;top: 0;right: 0;float: none;padding-left: 0;font-size: 20px;}
+                .content-header>.breadcrumb>li+li:before {color: #707070;}
+                .content-header>.breadcrumb>li>a {color: #3c8dbc;}
+                .content-header>.breadcrumb>li>div {color: #000000;}
+            </style>
 			<?php
 			if (!empty($breadcrumbs_arr)) {
 			    if (count($breadcrumbs_arr) > 2) {
                     array_pop($breadcrumbs_arr);
                 }
+                $breadcrumbs_arr = array_merge($breadcrumbs_arr, [BT\BT::div('<h1 style="display: inline;">' . $h1_str . '</h1>', 'style="display: inline;"')]);
+
 				echo BT\BT::breadcrumbs($breadcrumbs_arr);
 			}
 			?>
+            <!--
+            <h1>
+                <?= $h1_str ?>
+            </h1>
+            -->
 		</section>
 
 		<!-- Main content -->
