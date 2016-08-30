@@ -3,6 +3,7 @@
 namespace OLOG\AdminLTE;
 
 use OLOG\BT;
+use OLOG\InterfaceAction;
 use OLOG\Sanitize;
 
 class Layout
@@ -10,13 +11,11 @@ class Layout
 
 	static public function render($content_html, $action_obj = null)
 	{
-		//$breadcrumbs_arr = ConfWrapper::getOptionalValue(\OLOG\BT\BTConstants::MODULE_NAME . '.' . \OLOG\BT\BTConstants::BREADCRUMBS_PREFIX_ARR, []);
 		$breadcrumbs_arr = BT\BTConfig::getBreadcrumbsPrefixArr();
 
 		$h1_str = '&nbsp;';
 		$menu_arr = [];
 
-		//$application_title = ConfWrapper::getOptionalValue('php-bt.application_title', 'Application'); // TODO: key name to constant
 		$application_title = BT\BTConfig::getApplicationTitle();
 
 		$user_name = 'Имя пользователя отсутствует';
@@ -24,6 +23,37 @@ class Layout
 		if ($action_obj) {
 			if ($action_obj instanceof BT\InterfaceBreadcrumbs) {
 				$breadcrumbs_arr = array_merge($breadcrumbs_arr, $action_obj->currentBreadcrumbsArr());
+
+				// при такой схеме генерации бредкрамбов в них включается текущая страница, убираем ее
+				if (count($breadcrumbs_arr) > 2) {
+					array_pop($breadcrumbs_arr);
+				}
+			}
+
+			if ($action_obj instanceof BT\InterfaceTopActionObj) {
+				$top_action_obj = $action_obj->topActionObj();
+				$extra_breadcrumbs_arr = [];
+
+				while ($top_action_obj){
+					$top_action_title = '#NO_TITLE#';
+					if ($top_action_obj instanceof BT\InterfacePageTitle){
+						$top_action_title = $top_action_obj->currentPageTitle();
+					}
+
+					$top_action_url = '#NO_URL#';
+					if ($top_action_obj instanceof InterfaceAction){
+						$top_action_url = $top_action_obj->url();
+					}
+
+					array_unshift($extra_breadcrumbs_arr, BT\BT::a($top_action_url, $top_action_title));
+
+					$top_action_obj = null;
+					if ($top_action_obj instanceof BT\InterfaceTopActionObj) {
+						$top_action_obj = $top_action_obj->topActionObj();
+					}
+				}
+
+				$breadcrumbs_arr = array_merge($breadcrumbs_arr, $extra_breadcrumbs_arr);
 			}
 
 			if ($action_obj instanceof BT\InterfacePageTitle) {
@@ -35,7 +65,6 @@ class Layout
 			}
 		}
 
-		//$menu_classes_arr = ConfWrapper::getOptionalValue('php-bt.menu_classes_arr', []); // TODO: key name to constant
 		$menu_classes_arr = BT\BTConfig::getMenuClassesArr();
 
 		if ($menu_classes_arr) {
@@ -380,9 +409,6 @@ class Layout
             </style>
 			<?php
 			if (!empty($breadcrumbs_arr)) {
-			    if (count($breadcrumbs_arr) > 2) {
-                    array_pop($breadcrumbs_arr);
-                }
                 $breadcrumbs_arr = array_merge($breadcrumbs_arr, [BT\BT::div('<h1 style="display: inline;">' . $h1_str . '</h1>', 'style="display: inline;"')]);
 
 				echo BT\BT::breadcrumbs($breadcrumbs_arr);

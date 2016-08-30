@@ -6,32 +6,32 @@ use OLOG\BT;
 use OLOG\BT\InterfaceBreadcrumbs;
 use OLOG\BT\InterfacePageTitle;
 use OLOG\BT\InterfaceUserName;
+use OLOG\InterfaceAction;
 
-class DemoAction implements InterfaceBreadcrumbs, InterfacePageTitle, InterfaceUserName
+class DemoAdminAction implements
+    InterfaceAction,
+    InterfacePageTitle,
+    InterfaceUserName
 {
     public function currentUserName()
     {
         return 'Demo User';
     }
 
-    public function currentBreadcrumbsArr()
-    {
-        return [BT\BT::a('/admin/', '', 'glyphicon glyphicon-wrench')];
-    }
-
     public function currentPageTitle()
     {
-        return 'TEST PAGE TITLE';
+        return 'Admin';
     }
 
-    static public function getUrl()
+    public function url()
     {
-        return '/';
+        return '/admin';
     }
 
     public function action()
     {
         $html = '<div>TEST CONTENT</div>';
+        $html .= '<div>' . BT\BT::a((new DemoAction2(2))->url(), (new DemoAction2(2))->currentPageTitle()) . '</div>';
 
         \OLOG\AdminLTE\Layout::render($html, $this);
     }
