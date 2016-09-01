@@ -28,6 +28,10 @@ class DemoAdminAction implements
         return '/admin';
     }
 
+    public function pageToolbarHtml(){
+        return '<a class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></a>';
+    }
+
     public function action()
     {
         $html = '<div>TEST CONTENT</div>';
