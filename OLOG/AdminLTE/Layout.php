@@ -17,6 +17,7 @@ class Layout
 		$menu_arr = [];
 
 		$application_title = BT\BTConfig::getApplicationTitle();
+		$page_title = $application_title;
 
 		$user_name = 'Имя пользователя отсутствует';
 
@@ -58,6 +59,7 @@ class Layout
 
 			if ($action_obj instanceof BT\InterfacePageTitle) {
 				$h1_str = $action_obj->currentPageTitle();
+				$page_title = $h1_str;
 			}
 
 			if ($action_obj instanceof BT\InterfaceUserName) {
@@ -82,7 +84,7 @@ class Layout
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>AdminLTE 2 | Starter</title>
+	<title><?= $page_title ?></title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.6 -->
