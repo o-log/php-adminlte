@@ -17,11 +17,17 @@ class Layout
 		$menu_arr = [];
 
 		$application_title = BT\BTConfig::getApplicationTitle();
-		$page_title = $application_title;
 
+		$page_title = $application_title;
 		$user_name = 'Имя пользователя отсутствует';
+		$page_toolbar_html = '';
 
 		if ($action_obj) {
+			// запрашиваем до того как чтото будет выводиться на страницу, потому что там может быть редирект или еще какая-то работа с хидерами
+			if ($action_obj instanceof BT\InterfacePageToolbarHtml){
+				$page_toolbar_html = $action_obj->pageToolbarHtml();
+			}
+
 			if ($action_obj instanceof BT\InterfaceBreadcrumbs) {
 				$breadcrumbs_arr = array_merge($breadcrumbs_arr, $action_obj->currentBreadcrumbsArr());
 
@@ -417,9 +423,9 @@ class Layout
 				echo BT\BT::breadcrumbs($breadcrumbs_arr);
 			}
 
-			if (method_exists($action_obj, 'pageToolbarHtml')){
+			if ($page_toolbar_html != ''){
 				echo '<span class="toolbar">';
-				echo $action_obj->pageToolbarHtml();
+				echo $page_toolbar_html;
 				echo '</span>';
 			}
 
