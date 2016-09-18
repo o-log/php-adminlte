@@ -417,11 +417,8 @@ class Layout
 				.content-header>.toolbar {display: inline-block; vertical-align: middle;}
             </style>
 			<?php
-			if (!empty($breadcrumbs_arr)) {
-                $breadcrumbs_arr = array_merge($breadcrumbs_arr, [BT\BT::div('<h1 style="display: inline;">' . $h1_str . '</h1>', 'style="display: inline;"')]);
-
-				echo BT\BT::breadcrumbs($breadcrumbs_arr);
-			}
+            $breadcrumbs_arr = array_merge($breadcrumbs_arr, [BT\BT::div('<h1 style="display: inline;">' . $h1_str . '</h1>', 'style="display: inline;"')]);
+			echo BT\BT::breadcrumbs($breadcrumbs_arr);
 
 			if ($page_toolbar_html != ''){
 				echo '<span class="toolbar">';
