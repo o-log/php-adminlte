@@ -410,7 +410,7 @@ class Layout
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
             <style>
-                .content-header>.breadcrumb {position: relative;margin-top: 5px;top: 0;right: 0;float: none;padding-left: 0;font-size: 20px; display: inline-block; vertical-align: middle;}
+                .content-header>.breadcrumb {position: relative;margin-top: 5px;top: 0;right: 0;float: none;padding-left: 0;font-size: 20px;display: inline-block;vertical-align: middle;background: transparent !important;}
                 .content-header>.breadcrumb>li+li:before {content: '/\00a0';color: #b0b0b0;}
                 .content-header>.breadcrumb>li>a {color: #3c8dbc;}
                 .content-header>.breadcrumb>li>div {color: #000000;}
