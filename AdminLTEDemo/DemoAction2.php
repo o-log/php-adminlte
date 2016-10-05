@@ -5,10 +5,12 @@ namespace AdminLTEDemo;
 use OLOG\AdminLTE\LayoutAdminlte;
 use OLOG\InterfaceAction;
 use OLOG\Layouts\InterfacePageTitle;
+use OLOG\Layouts\InterfaceTopActionObj;
 
 class DemoAction2 implements
     InterfaceAction,
-    InterfacePageTitle
+    InterfacePageTitle,
+    InterfaceTopActionObj
 {
     protected $id;
 
