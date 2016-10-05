@@ -357,7 +357,7 @@ class Layout
 				foreach ($menu_arr as $menu_item_obj) {
 					$children_arr = $menu_item_obj->getChildrenArr();
 
-					$href = '';
+					$href = 'href="#"';
 					if ($menu_item_obj->getUrl()) {
 						$href = 'href="' . Sanitize::sanitizeUrl($menu_item_obj->getUrl()) . '"';
 					}
@@ -410,14 +410,14 @@ class Layout
 		<!-- Content Header (Page header) -->
 		<section class="content-header">
             <style>
-                .content-header>.breadcrumb {position: relative;margin-top: 5px;top: 0;right: 0;float: none;padding-left: 0;font-size: 20px;display: inline-block;vertical-align: middle;background: transparent !important;}
+                .content-header>.breadcrumb {position: relative;margin-top: 5px;top: 0;right: 0;float: none;padding-left: 0;font-size: 14px;display: inline-block;vertical-align: middle;background: transparent !important;}
                 .content-header>.breadcrumb>li+li:before {content: '/\00a0';color: #b0b0b0;}
                 .content-header>.breadcrumb>li>a {color: #3c8dbc;}
-                .content-header>.breadcrumb>li>div {color: #000000;}
+                .content-header>.breadcrumb>li>div {color: #333333;}
 				.content-header>.toolbar {display: inline-block; vertical-align: middle;}
             </style>
 			<?php
-            $breadcrumbs_arr = array_merge($breadcrumbs_arr, [BT\BT::div('<h1 style="display: inline;">' . $h1_str . '</h1>', 'style="display: inline;"')]);
+            $breadcrumbs_arr = array_merge($breadcrumbs_arr, [BT\BT::div($h1_str, 'style="display: inline;"')]);
 			echo BT\BT::breadcrumbs($breadcrumbs_arr);
 
 			if ($page_toolbar_html != ''){
