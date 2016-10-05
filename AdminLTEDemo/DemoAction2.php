@@ -2,14 +2,13 @@
 
 namespace AdminLTEDemo;
 
-use OLOG\BT\InterfacePageTitle;
-use OLOG\BT\InterfaceTopActionObj;
+use OLOG\AdminLTE\LayoutAdminlte;
 use OLOG\InterfaceAction;
+use OLOG\Layouts\InterfacePageTitle;
 
 class DemoAction2 implements
     InterfaceAction,
-    InterfacePageTitle,
-    InterfaceTopActionObj
+    InterfacePageTitle
 {
     protected $id;
 
@@ -22,7 +21,7 @@ class DemoAction2 implements
         return '/action/' . $this->id;
     }
 
-    public function currentPageTitle(){
+    public function pageTitle(){
         return 'Action ' . $this->id;
     }
 
@@ -35,6 +34,6 @@ class DemoAction2 implements
 
         $html .= '<div>TEST ACTION ' . $this->id . '</div>';
 
-        \OLOG\AdminLTE\Layout::render($html, $this);
+        LayoutAdminlte::render($html, $this);
     }
 }

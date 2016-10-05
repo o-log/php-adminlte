@@ -2,10 +2,7 @@
 
 namespace AdminLTEDemo;
 
-use OLOG\BT;
-use OLOG\BT\InterfaceBreadcrumbs;
-use OLOG\BT\InterfacePageTitle;
-use OLOG\BT\InterfaceUserName;
+use OLOG\HTML;
 use OLOG\InterfaceAction;
 
 class DemoMainPageAction implements
@@ -24,7 +21,7 @@ class DemoMainPageAction implements
     public function action()
     {
         $html = '';
-        $html .= '<div>' . BT\BT::a((new DemoAdminAction())->url(), (new DemoAdminAction())->currentPageTitle()) . '</div>';
+        $html .= '<div>' . HTML::a((new DemoAdminAction())->url(), (new DemoAdminAction())->pageTitle()) . '</div>';
 
         echo $html;
     }

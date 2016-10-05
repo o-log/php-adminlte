@@ -2,23 +2,23 @@
 
 namespace AdminLTEDemo;
 
-use OLOG\BT;
-use OLOG\BT\InterfaceBreadcrumbs;
-use OLOG\BT\InterfacePageTitle;
-use OLOG\BT\InterfaceUserName;
+use OLOG\AdminLTE\LayoutAdminlte;
+use OLOG\HTML;
 use OLOG\InterfaceAction;
+use OLOG\Layouts\InterfacePageTitle;
 
 class DemoAdminAction implements
     InterfaceAction,
-    InterfacePageTitle,
-    InterfaceUserName
+    InterfacePageTitle
 {
+    /*
     public function currentUserName()
     {
         return 'Demo User';
     }
+    */
 
-    public function currentPageTitle()
+    public function pageTitle()
     {
         return 'Admin';
     }
@@ -35,9 +35,9 @@ class DemoAdminAction implements
     public function action()
     {
         $html = '<div>TEST CONTENT</div>';
-        $html .= '<div>' . BT\BT::a((new DemoAction2(2))->url(), (new DemoAction2(2))->currentPageTitle()) . '</div>';
+        $html .= '<div>' . HTML::a((new DemoAction2(2))->url(), (new DemoAction2(2))->pageTitle()) . '</div>';
 
-        \OLOG\AdminLTE\Layout::render($html, $this);
+        LayoutAdminlte::render($html, $this);
     }
 
 	public function showLayoutContentPanel()
