@@ -54,10 +54,11 @@ class Layout
 
 					array_unshift($extra_breadcrumbs_arr, BT\BT::a($top_action_url, $top_action_title));
 
-					$top_action_obj = null;
 					if ($top_action_obj instanceof BT\InterfaceTopActionObj) {
 						$top_action_obj = $top_action_obj->topActionObj();
+						continue;
 					}
+					$top_action_obj = null;
 				}
 
 				$breadcrumbs_arr = array_merge($breadcrumbs_arr, $extra_breadcrumbs_arr);
