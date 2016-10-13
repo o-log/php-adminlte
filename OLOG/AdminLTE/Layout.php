@@ -2,8 +2,11 @@
 
 namespace OLOG\AdminLTE;
 
+use OLOG\Assert;
 use OLOG\BT;
 use OLOG\InterfaceAction;
+use OLOG\Layouts\InterfaceMenu;
+use OLOG\Layouts\MenuItem;
 use OLOG\Sanitize;
 
 class Layout
@@ -78,6 +81,9 @@ class Layout
 		if ($menu_classes_arr) {
 			foreach ($menu_classes_arr as $menu_class) {
 				if (in_array(BT\InterfaceMenu::class, class_implements($menu_class))) {
+					$menu_arr = array_merge($menu_arr, $menu_class::menuArr());
+				}
+				if (in_array(InterfaceMenu::class, class_implements($menu_class))) {
 					$menu_arr = array_merge($menu_arr, $menu_class::menuArr());
 				}
 			}
@@ -353,41 +359,81 @@ class Layout
 				<!-- Optionally, you can add icons to the links -->
 				<?php
 
-				/** @var $menu_item_obj MenuItem */
 				foreach ($menu_arr as $menu_item_obj) {
-					$children_arr = $menu_item_obj->getChildrenArr();
+					if ($menu_item_obj instanceof BT\MenuItem) {
+						$children_arr = $menu_item_obj->getChildrenArr();
 
-					$href = 'href="#"';
-					if ($menu_item_obj->getUrl()) {
-						$href = 'href="' . Sanitize::sanitizeUrl($menu_item_obj->getUrl()) . '"';
-					}
-
-					$icon = '';
-					if ($menu_item_obj->getIconClassesStr()) {
-						$icon = '<i class="' . $menu_item_obj->getIconClassesStr() . '"></i> ';
-					}
-
-					if (count($children_arr)) {
-						echo '<li class="treeview">';
-						echo '<a ' . $href . '>' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
-						echo '<ul class="treeview-menu">';
-						/** @var  $child_menu_item_obj MenuItem */
-						foreach ($children_arr as $child_menu_item_obj) {
-							$children_href = '';
-							if ($child_menu_item_obj->getUrl()) {
-								$children_href = 'href="' . Sanitize::sanitizeUrl($child_menu_item_obj->getUrl()) . '"';
-							}
-
-							$children_icon = '';
-							if ($child_menu_item_obj->getIconClassesStr()) {
-								$children_icon = '<i class="' . $child_menu_item_obj->getIconClassesStr() . '"></i> ';
-							}
-
-							echo '<li><a ' . $children_href . '>' . $children_icon . '<span>' . Sanitize::sanitizeTagContent($child_menu_item_obj->getText()) . '</span></a></li>';
+						$href = 'href="#"';
+						if ($menu_item_obj->getUrl()) {
+							$href = 'href="' . Sanitize::sanitizeUrl($menu_item_obj->getUrl()) . '"';
 						}
-						echo '</ul>';
+
+						$icon = '';
+						if ($menu_item_obj->getIconClassesStr()) {
+							$icon = '<i class="' . $menu_item_obj->getIconClassesStr() . '"></i> ';
+						}
+
+						if (count($children_arr)) {
+							echo '<li class="treeview">';
+							echo '<a ' . $href . '>' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+							echo '<ul class="treeview-menu">';
+							/** @var  $child_menu_item_obj MenuItem */
+							foreach ($children_arr as $child_menu_item_obj) {
+								$children_href = '';
+								if ($child_menu_item_obj->getUrl()) {
+									$children_href = 'href="' . Sanitize::sanitizeUrl($child_menu_item_obj->getUrl()) . '"';
+								}
+
+								$children_icon = '';
+								if ($child_menu_item_obj->getIconClassesStr()) {
+									$children_icon = '<i class="' . $child_menu_item_obj->getIconClassesStr() . '"></i> ';
+								}
+
+								echo '<li><a ' . $children_href . '>' . $children_icon . '<span>' . Sanitize::sanitizeTagContent($child_menu_item_obj->getText()) . '</span></a></li>';
+							}
+							echo '</ul>';
+						} else {
+							echo '<li><a ' . $href . '>' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span></a></li>';
+						}
+					} elseif ($menu_item_obj instanceof MenuItem) {
+						$children_arr = $menu_item_obj->getChildrenArr();
+
+						$href = 'href="#"';
+						if ($menu_item_obj->getUrl()) {
+							$href = 'href="' . Sanitize::sanitizeUrl($menu_item_obj->getUrl()) . '"';
+						}
+
+						$icon = '';
+						if ($menu_item_obj->getIconClassesStr()) {
+							$icon = '<i class="' . $menu_item_obj->getIconClassesStr() . '"></i> ';
+						}
+
+						if (count($children_arr)) {
+							echo '<li class="treeview">';
+							echo '<a ' . $href . '>' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+							echo '<ul class="treeview-menu">';
+							/** @var  $child_menu_item_obj MenuItem */
+							foreach ($children_arr as $child_menu_item_obj) {
+								Assert::assert($child_menu_item_obj instanceof MenuItem);
+
+								$children_href = '';
+								if ($child_menu_item_obj->getUrl()) {
+									$children_href = 'href="' . Sanitize::sanitizeUrl($child_menu_item_obj->getUrl()) . '"';
+								}
+
+								$children_icon = '';
+								if ($child_menu_item_obj->getIconClassesStr()) {
+									$children_icon = '<i class="' . $child_menu_item_obj->getIconClassesStr() . '"></i> ';
+								}
+
+								echo '<li><a ' . $children_href . '>' . $children_icon . '<span>' . Sanitize::sanitizeTagContent($child_menu_item_obj->getText()) . '</span></a></li>';
+							}
+							echo '</ul>';
+						} else {
+							echo '<li><a ' . $href . '>' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span></a></li>';
+						}
 					} else {
-						echo '<li><a ' . $href . '>' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span></a></li>';
+						throw new \Exception('unsupported menu item object');
 					}
 				}
 				?>
