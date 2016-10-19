@@ -16,9 +16,6 @@
     "o-log/php-router" : "1.*",
     "o-log/php-layouts" : "1.*"
   },
-  "require-dev" : {
-    "o-log/php-bt": "5.*"
-  },
   "autoload" : {
     "psr-0" : {
       "OLOG" : "",
