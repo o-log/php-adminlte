@@ -74,8 +74,13 @@ class Layout
 			if ($action_obj instanceof BT\InterfaceUserName) {
 				$user_name = $action_obj->currentUserName();
 			}
+
+			if ($action_obj instanceof InterfaceMenu){
+				$menu_arr = $action_obj::menuArr();
+			}
 		}
 
+		/*
 		$menu_classes_arr = BT\BTConfig::getMenuClassesArr();
 
 		if ($menu_classes_arr) {
@@ -88,6 +93,7 @@ class Layout
 				}
 			}
 		}
+		*/
 
 		?>
 
