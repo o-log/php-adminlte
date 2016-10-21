@@ -69,28 +69,10 @@ class LayoutAdminlte implements
                 $page_title = $h1_str;
             }
 
-            /*
-            if ($action_obj instanceof BT\InterfaceUserName) {
-                $user_name = $action_obj->currentUserName();
-            }
-            */
-
             if ($action_obj instanceof InterfaceMenu){
                 $menu_arr = $action_obj::menuArr();
             }
         }
-
-        /*
-        $menu_classes_arr = LayoutsConfig::getAdminMenuClassesArr();
-
-        if ($menu_classes_arr) {
-            foreach ($menu_classes_arr as $menu_class) {
-                if (in_array(InterfaceMenu::class, class_implements($menu_class))) {
-                    $menu_arr = array_merge($menu_arr, $menu_class::menuArr());
-                }
-            }
-        }
-        */
 
         ?>
 
