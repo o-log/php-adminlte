@@ -4,10 +4,12 @@ namespace OLOG\AdminLTE;
 
 use OLOG\HTML;
 use OLOG\InterfaceAction;
+use OLOG\Layouts\InterfaceCurrentUserName;
 use OLOG\Layouts\InterfaceLayout;
 use OLOG\Layouts\InterfaceMenu;
 use OLOG\Layouts\InterfacePageTitle;
 use OLOG\Layouts\InterfacePageToolbarHtml;
+use OLOG\Layouts\InterfaceSiteTitle;
 use OLOG\Layouts\InterfaceTopActionObj;
 use OLOG\Layouts\LayoutsConfig;
 use OLOG\Layouts\MenuItem;
@@ -24,9 +26,9 @@ class LayoutAdminlte implements
         $h1_str = '&nbsp;';
         $menu_arr = [];
 
-        $application_title = LayoutsConfig::getAdminSiteTitle();
+        $site_title = 'HOME';
 
-        $page_title = $application_title;
+        $page_title = $site_title;
         $user_name = 'Имя пользователя отсутствует';
         $page_toolbar_html = '';
 
@@ -34,6 +36,14 @@ class LayoutAdminlte implements
             // запрашиваем до того как чтото будет выводиться на страницу, потому что там может быть редирект или еще какая-то работа с хидерами
             if ($action_obj instanceof InterfacePageToolbarHtml){
                 $page_toolbar_html = $action_obj->pageToolbarHtml();
+            }
+
+            if ($action_obj instanceof InterfaceCurrentUserName){
+                $user_name = $action_obj->currentUserName();
+            }
+
+            if ($action_obj instanceof InterfaceSiteTitle){
+                $site_title = $action_obj->siteTitle();
             }
 
             if ($action_obj instanceof InterfaceTopActionObj) {
@@ -128,9 +138,9 @@ class LayoutAdminlte implements
                 <!-- Logo -->
                 <a href="/" class="logo">
                     <!-- mini logo for sidebar mini 50x50 pixels -->
-                    <span class="logo-mini"><?= mb_substr($application_title, 0, 3)  ?></span>
+                    <span class="logo-mini"><?= mb_substr($site_title, 0, 3)  ?></span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg"><?= $application_title ?></span>
+                    <span class="logo-lg"><?= $site_title ?></span>
                 </a>
 
                 <!-- Header Navbar -->
