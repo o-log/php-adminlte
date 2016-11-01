@@ -635,11 +635,9 @@ class LayoutAdminlte implements
 		}
 
 		$children_arr = $menu_item_obj->getChildrenArr();
-		if (!empty($children_arr)) {
-			foreach ($children_arr as $child_menu_item_obj) {
-				if ($child_menu_item_obj->getUrl() == Url::getCurrentUrl()) {
-					return true;
-				}
+		foreach ($children_arr as $child_menu_item_obj) {
+			if ($child_menu_item_obj->getUrl() == Url::getCurrentUrl()) {
+				return true;
 			}
 		}
 
