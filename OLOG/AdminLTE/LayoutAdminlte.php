@@ -627,7 +627,7 @@ class LayoutAdminlte implements
 		<?php
 	}
 
-	public function isRequestedPage($menu_item_obj)
+	static public function isRequestedPage($menu_item_obj)
 	{
 
 		if ($menu_item_obj->getUrl() == Url::getCurrentUrl()) {
@@ -635,9 +635,11 @@ class LayoutAdminlte implements
 		}
 
 		$children_arr = $menu_item_obj->getChildrenArr();
-		foreach ($children_arr as $child_menu_item_obj) {
-			if ($child_menu_item_obj->getUrl() == Url::getCurrentUrl()) {
-				return true;
+		if (!empty($children_arr)) {
+			foreach ($children_arr as $child_menu_item_obj) {
+				if ($child_menu_item_obj->getUrl() == Url::getCurrentUrl()) {
+					return true;
+				}
 			}
 		}
 
