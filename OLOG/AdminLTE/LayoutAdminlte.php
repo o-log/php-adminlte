@@ -419,7 +419,7 @@ class LayoutAdminlte implements
 								}
 								echo '</ul>';
 							} else {
-								echo '<li><a  href="' . $href . '">' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span></a></li>';
+								echo '<li class="' . $li_active . '"><a  href="' . $href . '">' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span></a></li>';
 							}
 						}
 						?>
