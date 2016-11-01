@@ -5,18 +5,14 @@ namespace AdminLTEDemo;
 use OLOG\AdminLTE\LayoutAdminlte;
 use OLOG\HTML;
 use OLOG\InterfaceAction;
+use OLOG\Layouts\InterfaceMenu;
 use OLOG\Layouts\InterfacePageTitle;
 
 class DemoAdminAction implements
     InterfaceAction,
-    InterfacePageTitle
+    InterfacePageTitle,
+	InterfaceMenu
 {
-    /*
-    public function currentUserName()
-    {
-        return 'Demo User';
-    }
-    */
 
     public function pageTitle()
     {
@@ -30,6 +26,11 @@ class DemoAdminAction implements
 
     public function pageToolbarHtml(){
         return '<a class="btn btn-default"><span class="glyphicon glyphicon-plus"></span></a>';
+    }
+
+	static public function menuArr()
+    {
+	    return DemoMenu::menuArr();
     }
 
     public function action()

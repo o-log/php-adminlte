@@ -13,19 +13,6 @@ class DemoConfig
         date_default_timezone_set('Europe/Moscow');
 
         LayoutsConfig::setAdminLayoutClassName(\OLOG\AdminLTE\LayoutAdminlte::class);
-
-        /*
-        BTConfig::setBreadcrumbsPrefixArr(
-            [
-                \OLOG\BT\BT::a(\BTDemo\DemoAction::getUrl(), '', 'glyphicon glyphicon-home'),
-                //\OLOG\BT\BT::a('/admin', '', 'glyphicon glyphicon-wrench')
-            ]
-        );
-        */
-
-        LayoutsConfig::setAdminMenuClassesArr([
-            DemoMenu::class
-        ]);
     }
 
 }
