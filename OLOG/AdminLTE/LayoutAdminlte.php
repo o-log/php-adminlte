@@ -136,7 +136,7 @@ class LayoutAdminlte implements
 			<![endif]-->
 		</head>
         <?php
-        $body_classes = 'hold-transition skin-blue sidebar-mini';
+        $body_classes = 'hold-transition skin-blue sidebar-mini layout-boxed';
         if (method_exists($action_obj, 'overrideBodyClasses')) {
             $body_classes = $action_obj->overrideBodyClasses();
         }
