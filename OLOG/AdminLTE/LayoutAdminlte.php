@@ -135,7 +135,13 @@ class LayoutAdminlte implements
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 			<![endif]-->
 		</head>
-		<body class="hold-transition skin-blue sidebar-mini">
+        <?php
+        $body_classes = 'hold-transition skin-blue sidebar-mini';
+        if (method_exists($action_obj, 'overrideBodyClasses')) {
+            $body_classes = 'style="background-color: ' . $action_obj->overrideBodyClasses() . ';"';
+        }
+        ?>
+        <body class="<?= $body_classes ?>">
 
 		<div class="wrapper">
 
