@@ -138,7 +138,7 @@ class LayoutAdminlte implements
         <?php
         $body_classes = 'hold-transition skin-blue sidebar-mini';
         if (method_exists($action_obj, 'overrideBodyClasses')) {
-            $body_classes = 'style="background-color: ' . $action_obj->overrideBodyClasses() . ';"';
+            $body_classes = $action_obj->overrideBodyClasses();
         }
         ?>
         <body class="<?= $body_classes ?>">
