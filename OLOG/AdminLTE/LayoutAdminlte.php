@@ -5,6 +5,7 @@ namespace OLOG\AdminLTE;
 use OLOG\HTML;
 use OLOG\InterfaceAction;
 use OLOG\Layouts\InterfaceCurrentUserName;
+use OLOG\Layouts\InterfaceHeadHtml;
 use OLOG\Layouts\InterfaceLayout;
 use OLOG\Layouts\InterfaceMenu;
 use OLOG\Layouts\InterfacePageTitle;
@@ -24,6 +25,7 @@ class LayoutAdminlte implements
 		$breadcrumbs_arr = [];
 
 		$h1_str = '&nbsp;';
+		$include_head_html = '';
 		$menu_arr = [];
 
 		$site_title = 'HOME';
@@ -84,6 +86,10 @@ class LayoutAdminlte implements
 			if ($action_obj instanceof InterfaceMenu) {
 				$menu_arr = $action_obj::menuArr();
 			}
+
+			if ($action_obj instanceof InterfaceHeadHtml) {
+				$include_head_html = $action_obj->includeHeadHtml();
+			}
 		}
 
 		?>
@@ -134,6 +140,7 @@ class LayoutAdminlte implements
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
 			<![endif]-->
+			<?= $include_head_html ?>
 		</head>
         <?php
         $body_classes = 'hold-transition skin-blue sidebar-mini layout-boxed';
