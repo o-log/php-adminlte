@@ -448,6 +448,11 @@ class LayoutAdminlte implements
 				<!-- Content Header (Page header) -->
 				<section class="content-header">
 					<style>
+						.btn-default .active {
+							background-color: #d4d4d4;
+							box-shadow: inset 0 3px 5px rgba(0,0,0,.225);
+						}
+
 						.content-header > .breadcrumb {
 							position: relative;
 							margin-top: 5px;
