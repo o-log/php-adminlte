@@ -145,7 +145,7 @@ class LayoutAdminlte implements
 
 		<div class="wrapper">
 			<style>
-				.btn-default .active {
+				.btn-default.active {
 					background-color: #d4d4d4;
 					box-shadow: inset 0 3px 5px rgba(0,0,0,.225);
 				}
