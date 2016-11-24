@@ -29,7 +29,7 @@ class LayoutAdminlte implements
 		$site_title = 'HOME';
 
 		$page_title = $site_title;
-		$user_name = 'Ананим';
+		$user_name = 'Неизвестный пользователь';
 		$page_toolbar_html = '';
 
 		if ($action_obj) {
