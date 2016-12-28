@@ -467,10 +467,18 @@ class LayoutAdminlte implements
 							background: transparent !important;
 						}
 
-						.content-header > .breadcrumb > li + li:before {
+						.content-header > .breadcrumb > li:after {
 							padding: 0 2px 0 4px;
 							content: '/\00a0';
 							color: #b0b0b0;
+						}
+
+						.content-header > .breadcrumb > li:last-child:after {
+							content: none;
+						}
+
+						.content-header > .breadcrumb > li + li:before {
+							content: none;
 						}
 
 						.content-header > .breadcrumb > li > a {
