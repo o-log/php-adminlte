@@ -2,17 +2,24 @@
 
 namespace AdminLTEDemo;
 
+use OLOG\ActionInterface;
 use OLOG\AdminLTE\LayoutAdminlte;
-use OLOG\InterfaceAction;
-use OLOG\Layouts\InterfacePageTitle;
-use OLOG\Layouts\InterfaceTopActionObj;
+use OLOG\Layouts\MenuInterface;
+use OLOG\Layouts\PageTitleInterface;
+use OLOG\Layouts\TopActionObjInterface;
 
 class DemoAction2 implements
-    InterfaceAction,
-    InterfacePageTitle,
-    InterfaceTopActionObj
+    ActionInterface,
+    PageTitleInterface,
+    TopActionObjInterface,
+    MenuInterface
 {
     protected $id;
+
+    static public function menuArr()
+    {
+        return DemoMenu::menuArr();
+    }
 
     public function __construct($id = '(\d+)')
     {

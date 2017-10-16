@@ -2,11 +2,11 @@
 
 namespace AdminLTEDemo;
 
+use OLOG\ActionInterface;
 use OLOG\HTML;
-use OLOG\InterfaceAction;
 
 class DemoMainPageAction implements
-    InterfaceAction
+    ActionInterface
 {
     public function currentPageTitle()
     {
