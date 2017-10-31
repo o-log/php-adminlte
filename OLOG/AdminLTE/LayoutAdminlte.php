@@ -2,20 +2,21 @@
 
 namespace OLOG\AdminLTE;
 
-use OLOG\ActionInterface;
 use OLOG\HTML;
-use OLOG\Layouts\CurrentUserNameInterface;
-use OLOG\Layouts\LayoutInterface;
-use OLOG\Layouts\MenuInterface;
+use OLOG\InterfaceAction;
+use OLOG\Layouts\InterfaceCurrentUserName;
+use OLOG\Layouts\InterfaceLayout;
+use OLOG\Layouts\InterfaceMenu;
+use OLOG\Layouts\InterfacePageTitle;
+use OLOG\Layouts\InterfacePageToolbarHtml;
+use OLOG\Layouts\InterfaceSiteTitle;
+use OLOG\Layouts\InterfaceTopActionObj;
 use OLOG\Layouts\MenuItem;
-use OLOG\Layouts\PageTitleInterface;
-use OLOG\Layouts\PageToolbarHtmlInterface;
-use OLOG\Layouts\SiteTitleInterface;
-use OLOG\Layouts\TopActionObjInterface;
+use OLOG\Sanitize;
 use OLOG\Url;
 
 class LayoutAdminlte implements
-	LayoutInterface
+	InterfaceLayout
 {
 
 	static public function render($content_html, $action_obj = null)
@@ -33,36 +34,36 @@ class LayoutAdminlte implements
 
 		if ($action_obj) {
 			// запрашиваем до того как чтото будет выводиться на страницу, потому что там может быть редирект или еще какая-то работа с хидерами
-			if ($action_obj instanceof PageToolbarHtmlInterface) {
+			if ($action_obj instanceof InterfacePageToolbarHtml) {
 				$page_toolbar_html = $action_obj->pageToolbarHtml();
 			}
 
-			if ($action_obj instanceof CurrentUserNameInterface) {
+			if ($action_obj instanceof InterfaceCurrentUserName) {
 				$user_name = $action_obj->currentUserName();
 			}
 
-			if ($action_obj instanceof SiteTitleInterface) {
+			if ($action_obj instanceof InterfaceSiteTitle) {
 				$site_title = $action_obj->siteTitle();
 			}
 
-			if ($action_obj instanceof TopActionObjInterface) {
+			if ($action_obj instanceof InterfaceTopActionObj) {
 				$top_action_obj = $action_obj->topActionObj();
 				$extra_breadcrumbs_arr = [];
 
 				while ($top_action_obj) {
 					$top_action_title = '#NO_TITLE#';
-					if ($top_action_obj instanceof PageTitleInterface) {
+					if ($top_action_obj instanceof InterfacePageTitle) {
 						$top_action_title = $top_action_obj->pageTitle();
 					}
 
 					$top_action_url = '#NO_URL#';
-					if ($top_action_obj instanceof ActionInterface) {
+					if ($top_action_obj instanceof InterfaceAction) {
 						$top_action_url = $top_action_obj->url();
 					}
 
 					array_unshift($extra_breadcrumbs_arr, HTML::a($top_action_url, $top_action_title));
 
-					if ($top_action_obj instanceof TopActionObjInterface) {
+					if ($top_action_obj instanceof InterfaceTopActionObj) {
 						if ($top_action_obj != $top_action_obj->topActionObj()) {
 							$top_action_obj = $top_action_obj->topActionObj();
 							continue;
@@ -75,12 +76,12 @@ class LayoutAdminlte implements
 				$breadcrumbs_arr = array_merge($breadcrumbs_arr, $extra_breadcrumbs_arr);
 			}
 
-			if ($action_obj instanceof PageTitleInterface) {
+			if ($action_obj instanceof InterfacePageTitle) {
 				$h1_str = $action_obj->pageTitle();
 				$page_title = $h1_str;
 			}
 
-			if ($action_obj instanceof MenuInterface) {
+			if ($action_obj instanceof InterfaceMenu) {
 				$menu_arr = $action_obj::menuArr();
 			}
 		}
@@ -388,7 +389,7 @@ class LayoutAdminlte implements
 
 							$href = '#';
 							if ($menu_item_obj->getUrl()) {
-								$href = HTML::url($menu_item_obj->getUrl());
+								$href = Sanitize::sanitizeUrl($menu_item_obj->getUrl());
 							}
 
 							$icon = '';
@@ -406,13 +407,13 @@ class LayoutAdminlte implements
 
 							if (count($children_arr)) {
 								echo '<li class="treeview ' . $li_active . '">';
-								echo '<a href="' . $href . '">' . $icon . '<span>' . HTML::content($menu_item_obj->getText()) . '</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
+								echo '<a href="' . $href . '">' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span><span class="pull-right-container"><i class="fa fa-angle-left pull-right"></i></span></a>';
 								echo '<ul class="treeview-menu ' . $ul_active . '">';
 								/** @var  $child_menu_item_obj MenuItem */
 								foreach ($children_arr as $child_menu_item_obj) {
 									$children_href = '#';
 									if ($child_menu_item_obj->getUrl()) {
-										$children_href = HTML::url($child_menu_item_obj->getUrl());
+										$children_href = Sanitize::sanitizeUrl($child_menu_item_obj->getUrl());
 									}
 
 									$children_icon = '';
@@ -426,11 +427,11 @@ class LayoutAdminlte implements
 										$li_active = ' active ';
 									}
 
-									echo '<li class="' . $li_active . '"><a href="' . $children_href . '">' . $children_icon . '<span>' . HTML::content($child_menu_item_obj->getText()) . '</span></a></li>';
+									echo '<li class="' . $li_active . '"><a href="' . $children_href . '">' . $children_icon . '<span>' . Sanitize::sanitizeTagContent($child_menu_item_obj->getText()) . '</span></a></li>';
 								}
 								echo '</ul>';
 							} else {
-								echo '<li class="' . $li_active . '"><a  href="' . $href . '">' . $icon . '<span>' . HTML::content($menu_item_obj->getText()) . '</span></a></li>';
+								echo '<li class="' . $li_active . '"><a  href="' . $href . '">' . $icon . '<span>' . Sanitize::sanitizeTagContent($menu_item_obj->getText()) . '</span></a></li>';
 							}
 						}
 						?>
@@ -649,13 +650,13 @@ class LayoutAdminlte implements
 	static public function isRequestedPage($menu_item_obj)
 	{
 
-		if ($menu_item_obj->getUrl() == Url::current()) {
+		if ($menu_item_obj->getUrl() == Url::getCurrentUrl()) {
 			return true;
 		}
 
 		$children_arr = $menu_item_obj->getChildrenArr();
 		foreach ($children_arr as $child_menu_item_obj) {
-			if ($child_menu_item_obj->getUrl() == Url::current()) {
+			if ($child_menu_item_obj->getUrl() == Url::getCurrentUrl()) {
 				return true;
 			}
 		}

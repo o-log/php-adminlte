@@ -2,16 +2,16 @@
 
 namespace AdminLTEDemo;
 
-use OLOG\ActionInterface;
 use OLOG\AdminLTE\LayoutAdminlte;
 use OLOG\HTML;
-use OLOG\Layouts\MenuInterface;
-use OLOG\Layouts\PageTitleInterface;
+use OLOG\InterfaceAction;
+use OLOG\Layouts\InterfaceMenu;
+use OLOG\Layouts\InterfacePageTitle;
 
 class DemoAdminAction implements
-    ActionInterface,
-    PageTitleInterface,
-	MenuInterface
+    InterfaceAction,
+    InterfacePageTitle,
+	InterfaceMenu
 {
 
     public function pageTitle()

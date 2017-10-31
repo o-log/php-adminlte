@@ -3,10 +3,10 @@
 namespace AdminLTEDemo;
 
 
-use OLOG\Layouts\MenuInterface;
+use OLOG\Layouts\InterfaceMenu;
 use OLOG\Layouts\MenuItem;
 
-class DemoMenu implements MenuInterface
+class DemoMenu implements InterfaceMenu
 {
     static public function menuArr(){
         return [
