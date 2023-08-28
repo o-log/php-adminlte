@@ -553,7 +553,7 @@ class LayoutAdminlte implements
 
 			<!-- Main Footer -->
 			<footer class="main-footer">
-				<strong>Copyright &copy; 2016.
+				<strong>Copyright &copy;
 			</footer>
 
 			<!-- Control Sidebar -->
