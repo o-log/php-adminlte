@@ -111,7 +111,7 @@ class LayoutAdminlte implements
 				  apply the skin class to the body tag so the changes take effect.
 			-->
 			<link rel="stylesheet"
-			      href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.5/css/skins/skin-blue.min.css">
+			      href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/2.3.5/css/skins/_all-skins.min.css">
 
 			<style>
 				.sidebar-collapse .sidebar-menu .treeview:hover .pull-right-container > .fa {
@@ -136,7 +136,7 @@ class LayoutAdminlte implements
 			<![endif]-->
 		</head>
         <?php
-        $body_classes = 'hold-transition skin-blue sidebar-mini layout-boxed';
+        $body_classes = 'hold-transition skin-black-light sidebar-mini';
         if (method_exists($action_obj, 'overrideBodyClasses')) {
             $body_classes = $action_obj->overrideBodyClasses();
         }
